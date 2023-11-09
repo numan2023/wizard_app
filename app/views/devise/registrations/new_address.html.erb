@@ -1,0 +1,46 @@
+<h2>住所情報登録</h2>
+
+<%= form_for @address do |f| %>
+  <%= render "devise/shared/error_messages", resource: @address %>
+
+  <div class="field">
+    <%= f.label :postal_code %><br />
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+<%# form_with/form_forについて / https://qiita.com/snskOgata/items/44d32a06045e6a52d11c %> 
+<%# form_with : rails5.1以前に使い分けられていたform_forとform_tagをどちらも同様に扱えるようにしたもの
+<%= form_with url: users_path do |form| # urlを渡している %>
+  <%#= form.text_field :email %>
+  <%#= form.submit %>
+<%# end %>
+<%# -> usr_pathに対してPOSTを行い、param[:email]のような形でtext_fieldに入力された値を取得できる
+
+<%= form_with model: @user do |form| # modelを渡している %>
+  <%#= form.text_field :email %>
+  <%#= form.submit %>
+<%# end %>
+
+<%# form_for : 関連するモデルが用意されている場合に使用(<=> form_tagは関連モデルがない場合に使用)
+<%#= form_for @user do |form| # @userというインスタンス変数を渡している %>
+  <%#= form.text_field :email # 受け取ったモデルから作ったformを利用  %>
+  <%#= form.submit %>
+<%# end %>
+
+
+<%#= form_tag users_path do # user_pathというURIを渡している %>
+  <%#= text_field_tag :email %>
+  <%#= submit_tag %>
+<%# end %> 
